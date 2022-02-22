@@ -1,11 +1,20 @@
 import * as d3 from "d3";
-import { useCallback, useEffect, useRef, FC } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  FC,
+  SetStateAction,
+  Dispatch,
+} from "react";
+import { v4 as uuidv4 } from "uuid";
 
 interface ZoomableChartProps {
   data?: LeafProps;
+  setBreadcrumbIds: Dispatch<SetStateAction<string[]>>;
 }
 
-const ZoomableChart: FC<ZoomableChartProps> = ({ data }) => {
+const ZoomableChart: FC<ZoomableChartProps> = ({ data, setBreadcrumbIds }) => {
   const refSvg = useRef<SVGSVGElement>(null);
 
   const partition = (dataPartition: any) => {
@@ -66,7 +75,6 @@ const ZoomableChart: FC<ZoomableChartProps> = ({ data }) => {
       .attr("pointer-events", (d: any) =>
         arcVisible(d.current) ? "auto" : "none"
       )
-
       .attr("d", (d: any) => arc(d.current));
 
     path
@@ -106,6 +114,9 @@ const ZoomableChart: FC<ZoomableChartProps> = ({ data }) => {
 
     function clicked(event: any, p: any) {
       parent.datum(p.parent || root);
+      const newUuid = uuidv4();
+      event.target.setAttribute("id", newUuid);
+      setBreadcrumbIds((prev) => [...prev, newUuid]);
 
       root.each(
         (d: any) =>

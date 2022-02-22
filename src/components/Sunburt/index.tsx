@@ -12,10 +12,13 @@ interface SunburtProps {
 }
 
 const Sunburt: FC<SunburtProps> = ({ data }) => {
+  const [breadcrumbIds, setBreadcrumbIds] = useState<string[]>([]);
   const [dataSelected, setDataSelected] = useState<DataResponseItem>();
   const [listTitle, setListTitle] = useState<
     { value: string; label: string }[]
   >([]);
+
+  console.log("breadcrumbIds: ", breadcrumbIds);
 
   useEffect(() => {
     setListTitle(
@@ -36,7 +39,10 @@ const Sunburt: FC<SunburtProps> = ({ data }) => {
           <Breadcrumb />
           <Legend />
         </div>
-        <ZoomableChart data={dataSelected?.data} />
+        <ZoomableChart
+          data={dataSelected?.data}
+          setBreadcrumbIds={setBreadcrumbIds}
+        />
       </div>
       <div className="Sunburt__right">
         <ListTitle
