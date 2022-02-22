@@ -1,0 +1,62 @@
+.Sunburt {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  &__left {
+    width: 72%;
+    padding: 0 12px 0 0;
+    padding: 12px;
+  }
+
+  &__right {
+    width: 28%;
+    border-left: 1px solid #ccc;
+    padding: 12px;
+  }
+
+  &__control {
+    display: flex;
+  }
+}
+
+.Title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ListTitle {
+  ul,
+  li {
+    list-style: none;
+    margin: 0 0 4px;
+    padding: 0;
+    button {
+      width: 100%;
+      padding: 8px 12px;
+      cursor: pointer;
+      text-align: left;
+      border-radius: 0;
+      border: 0;
+      font-size: 14px;
+      line-height: 1.25;
+      border-radius: 4px;
+      transition: 0.2s linear;
+      &:hover,
+      &.active {
+        background-color: #91d8fb;
+      }
+    }
+  }
+}
+
+.Breadcrumb {
+  width: 75%;
+}
+
+.Legend {
+  width: 25%;
+}
