@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Sunburt } from "./components";
+import { Sunburst } from "./components";
 import { mockData } from "./utils/constants";
 
 import "./App.scss";
@@ -17,7 +17,7 @@ function App() {
 
   return (
     <div className="App">
-      <Sunburt data={data} />
+      <Sunburst data={data} />
     </div>
   );
 }

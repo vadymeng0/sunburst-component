@@ -1,3 +1,3 @@
-import Sunburt from "./Sunburt";
+import Sunburst from "./Sunburst";
 
-export { Sunburt };
+export { Sunburst };

@@ -8,11 +8,11 @@ import ZoomableChart from "./ZoomableChart";
 
 import "./style.scss";
 
-interface SunburtProps {
+interface SunburstProps {
   data: DataResponseItem[];
 }
 
-const Sunburt: FC<SunburtProps> = ({ data }) => {
+const Sunburst: FC<SunburstProps> = ({ data }) => {
   const refSvg = useRef<SVGSVGElement>(null);
   const [breadcrumbIds, setBreadcrumbIds] = useState<
     { name: string; id: string }[]
@@ -60,10 +60,10 @@ const Sunburt: FC<SunburtProps> = ({ data }) => {
   };
 
   return (
-    <div className="Sunburt">
-      <div className="Sunburt__left">
+    <div className="Sunburst">
+      <div className="Sunburst__left">
         <Title title={dataSelected?.category || ""} />
-        <div className="Sunburt__control">
+        <div className="Sunburst__control">
           <Breadcrumb
             breadcrumbIds={breadcrumbIds}
             onClick={handleChangeBreadcrumb}
@@ -76,7 +76,7 @@ const Sunburt: FC<SunburtProps> = ({ data }) => {
           refSvg={refSvg}
         />
       </div>
-      <div className="Sunburt__right">
+      <div className="Sunburst__right">
         <ListTitle
           data={listTitle}
           selectedDataId={dataSelected?.Pk_id}
@@ -87,4 +87,4 @@ const Sunburt: FC<SunburtProps> = ({ data }) => {
   );
 };
 
-export default Sunburt;
+export default Sunburst;

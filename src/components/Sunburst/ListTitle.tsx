@@ -10,7 +10,7 @@ interface ListTitleProps {
 const List: FC<ListTitleProps> = ({ data, onClick, selectedDataId }) => {
   return (
     <div className="ListTitle">
-      <h2>Sunburt Display</h2>
+      <h2>Sunburst Display</h2>
       <ul>
         {data.map((item) => (
           <li key={item.value}>
