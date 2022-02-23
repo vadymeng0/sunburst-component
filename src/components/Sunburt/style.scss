@@ -19,6 +19,15 @@
 
   &__control {
     display: flex;
+    margin: 0 0 8px 0;
+    border: 1px solid #ccc;
+    border-left: 0;
+    border-right: 0;
+    padding: 4px 0;
+  }
+
+  h2 {
+    margin-bottom: 12px;
   }
 }
 
@@ -55,6 +64,43 @@
 
 .Breadcrumb {
   width: 75%;
+  button {
+    border: 0;
+    transition: 0.2s linear;
+    background: #efefef;
+    padding: 8px 12px 8px 24px;
+    margin: 4px 10px 4px 0;
+    cursor: pointer;
+    position: relative;
+    line-height: 16px;
+    &:after,
+    &:before {
+      transition: 0.2s linear;
+      content: " ";
+      position: absolute;
+      top: 0;
+      left: 100%;
+      border-top: 16px solid transparent;
+      border-bottom: 16px solid transparent;
+      border-left: 10px solid #efefef;
+    }
+    &:before {
+      left: 0px;
+      border-left-color: #fff;
+    }
+    &:first-child {
+      &:before {
+        display: none;
+      }
+    }
+    &:hover,
+    &:last-child {
+      &:after {
+        border-left-color: #91d8fb;
+      }
+      background-color: #91d8fb;
+    }
+  }
 }
 
 .Legend {

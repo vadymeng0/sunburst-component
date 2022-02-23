@@ -2,21 +2,24 @@ import * as d3 from "d3";
 import {
   useCallback,
   useEffect,
-  useRef,
   FC,
   SetStateAction,
   Dispatch,
+  RefObject,
 } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 interface ZoomableChartProps {
   data?: LeafProps;
-  setBreadcrumbIds: Dispatch<SetStateAction<string[]>>;
+  setBreadcrumbIds: Dispatch<SetStateAction<{ name: string; id: string }[]>>;
+  refSvg: RefObject<SVGSVGElement>;
 }
 
-const ZoomableChart: FC<ZoomableChartProps> = ({ data, setBreadcrumbIds }) => {
-  const refSvg = useRef<SVGSVGElement>(null);
-
+const ZoomableChart: FC<ZoomableChartProps> = ({
+  data,
+  setBreadcrumbIds,
+  refSvg,
+}) => {
   const partition = (dataPartition: any) => {
     const root = d3
       .hierarchy(dataPartition)
@@ -44,17 +47,15 @@ const ZoomableChart: FC<ZoomableChartProps> = ({ data, setBreadcrumbIds }) => {
     .outerRadius((d: any) => Math.max(d.y0 * radius, d.y1 * radius - 1));
 
   const buildGraph = useCallback(() => {
+    const svg = d3.select(refSvg.current).html("");
+
     if (!data) return;
 
     const root = partition(data);
 
     root.each((d: any) => (d.current = d));
 
-    const svg = d3
-      .select(refSvg.current)
-      .html("")
-      .attr("viewBox", [0, 0, width, width])
-      .style("font", "10px sans-serif");
+    svg.attr("viewBox", [0, 0, width, width]).style("font", "10px sans-serif");
 
     const g = svg
       .append("g")
@@ -112,11 +113,34 @@ const ZoomableChart: FC<ZoomableChartProps> = ({ data, setBreadcrumbIds }) => {
       .attr("pointer-events", "all")
       .on("click", clicked);
 
+    const handleBreadcrumb = (event: any, p: any) => {
+      setBreadcrumbIds((prev) => {
+        const isClickingBack = event.target.nodeName === "circle";
+        if (isClickingBack) {
+          const isOnRoot = prev.length === 1;
+          return isOnRoot ? prev : prev.slice(0, prev.length - 1);
+        }
+
+        const targetId = event.target.getAttribute("id");
+        if (targetId) {
+          const selectedIndex = prev.findIndex((item) => item.id === targetId);
+          const isNotInBreadcrumbList = selectedIndex === -1;
+
+          return isNotInBreadcrumbList
+            ? [...prev, { name: p.data.name, id: targetId }]
+            : prev.slice(0, selectedIndex + 1);
+        }
+
+        const newUuid = uuidv4();
+        event.target.setAttribute("id", newUuid);
+        return [...prev, { name: p.data.name, id: newUuid }];
+      });
+    };
+
     function clicked(event: any, p: any) {
       parent.datum(p.parent || root);
-      const newUuid = uuidv4();
-      event.target.setAttribute("id", newUuid);
-      setBreadcrumbIds((prev) => [...prev, newUuid]);
+
+      handleBreadcrumb(event, p);
 
       root.each(
         (d: any) =>
