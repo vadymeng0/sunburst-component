@@ -9,7 +9,7 @@ import ZoomableChart from "./ZoomableChart";
 import "./style.scss";
 
 interface SunburstProps {
-  data: DataResponseItem[];
+  data: ProjectDataResponseItem[];
 }
 
 const Sunburst: FC<SunburstProps> = ({ data }) => {
@@ -17,7 +17,7 @@ const Sunburst: FC<SunburstProps> = ({ data }) => {
   const [breadcrumbIds, setBreadcrumbIds] = useState<
     { name: string; id: string }[]
   >([]);
-  const [dataSelected, setDataSelected] = useState<DataResponseItem>();
+  const [dataSelected, setDataSelected] = useState<ProjectDataResponseItem>();
   const [listTitle, setListTitle] = useState<
     { value: string; label: string }[]
   >([]);
@@ -28,7 +28,7 @@ const Sunburst: FC<SunburstProps> = ({ data }) => {
 
   useEffect(() => {
     setListTitle(
-      data.map((item) => ({ value: item.Pk_id, label: item.category }))
+      data.map((item) => ({ value: item.id, label: item.category }))
     );
     setDataSelected(data?.[0]);
     if (data?.[0]) {
@@ -38,8 +38,8 @@ const Sunburst: FC<SunburstProps> = ({ data }) => {
 
   const handleChangeCategory = useCallback(
     (id: string) => {
-      const newDataSelected = data.filter((item) => item.Pk_id === id)?.[0];
-      if (dataSelected?.Pk_id !== newDataSelected.Pk_id) {
+      const newDataSelected = data.filter((item) => item.id === id)?.[0];
+      if (dataSelected?.id !== newDataSelected.id) {
         setDataSelected(newDataSelected);
         resetBreadcrumb(newDataSelected.data.name);
       }
@@ -79,7 +79,7 @@ const Sunburst: FC<SunburstProps> = ({ data }) => {
       <div className="Sunburst__right">
         <ListTitle
           data={listTitle}
-          selectedDataId={dataSelected?.Pk_id}
+          selectedDataId={dataSelected?.id}
           onClick={handleChangeCategory}
         />
       </div>

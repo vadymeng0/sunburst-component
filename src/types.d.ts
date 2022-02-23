@@ -8,11 +8,11 @@ interface LeafProps {
   children: (Leaf | LeafProps)[];
 }
 
-interface DataResponseItem {
-  Pk_id: string;
-  Fk_project_id: string;
+interface ProjectDataResponseItem {
+  id: string;
+  projectID: string;
   category: string;
   data: LeafProps;
   rev: number;
-  time_date_stamp: string;
+  timeDateStamp: string;
 }
