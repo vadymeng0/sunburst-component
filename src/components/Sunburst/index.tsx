@@ -1,4 +1,5 @@
 import { FC, useCallback, useEffect, useRef, useState } from "react";
+import * as d3 from "d3";
 import { cloneDeep } from "lodash";
 import Breadcrumb from "./Breadcrumb";
 import Legend from "./Legend";
@@ -7,6 +8,8 @@ import Title from "./Title";
 import ZoomableChart from "./ZoomableChart";
 
 import "./style.scss";
+import { getColorSchema, partition } from "../../utils/d3utils";
+import { MultiValue } from "react-select";
 
 interface SunburstProps {
   data: ProjectDataResponseItem[];
@@ -21,6 +24,38 @@ const Sunburst: FC<SunburstProps> = ({ data }) => {
   const [listTitle, setListTitle] = useState<
     { value: string; label: string }[]
   >([]);
+  const [listStatus, setListStatus] = useState<{ [key: string]: string }>({});
+  const [colorSchema, setColorSchema] = useState<string[]>([]);
+  const [selectedStatus, setSelectedStatus] = useState<
+    { value: string; label: string }[]
+  >([]);
+
+  useEffect(() => {
+    if (!dataSelected?.data.children.length) return;
+
+    const newListStatus: { [key: string]: string } = {};
+    const newColorSchema: string[] = [];
+    const rainbowColors = getColorSchema(dataSelected?.data.children.length);
+
+    const root = partition(dataSelected?.data);
+    const rooDescendants = root
+      .descendants()
+      .slice(1, dataSelected?.data.children.length + 1);
+
+    rooDescendants.forEach((item: any, index) => {
+      if (item.data.status && !newListStatus[item.data.status]) {
+        newListStatus[item.data.status] = rainbowColors[index];
+        newColorSchema.push(rainbowColors[index]);
+      } else {
+        newColorSchema.push(newListStatus[item.data.status as string]);
+      }
+    });
+    setListStatus(newListStatus);
+    setSelectedStatus(
+      Object.keys(newListStatus).map((item) => ({ value: item, label: item }))
+    );
+    setColorSchema(newColorSchema);
+  }, [dataSelected]);
 
   const resetBreadcrumb = (name: string) => {
     setBreadcrumbIds([{ name, id: "" }]);
@@ -59,6 +94,21 @@ const Sunburst: FC<SunburstProps> = ({ data }) => {
     }
   };
 
+  const handleChangeStatus = useCallback(
+    (newValue: MultiValue<{ value: string; label: string }>) => {
+      setSelectedStatus(newValue as { value: string; label: string }[]);
+      const newSelectedStatus = newValue.map((item) => item.value);
+
+      d3.selectAll(".ZoomableChart path").each(function () {
+        const thisPath = d3.select(this);
+        const currentStatus = thisPath.attr("data-status");
+        const isSelected = newSelectedStatus.includes(currentStatus);
+        thisPath.attr("fill", isSelected ? listStatus[currentStatus] : "grey");
+      });
+    },
+    [listStatus]
+  );
+
   return (
     <div className="Sunburst">
       <div className="Sunburst__left">
@@ -68,12 +118,17 @@ const Sunburst: FC<SunburstProps> = ({ data }) => {
             breadcrumbIds={breadcrumbIds}
             onClick={handleChangeBreadcrumb}
           />
-          <Legend />
+          <Legend
+            listStatus={listStatus}
+            onChange={handleChangeStatus}
+            value={selectedStatus}
+          />
         </div>
         <ZoomableChart
           data={dataSelected?.data}
           setBreadcrumbIds={setBreadcrumbIds}
           refSvg={refSvg}
+          colorSchema={colorSchema}
         />
       </div>
       <div className="Sunburst__right">

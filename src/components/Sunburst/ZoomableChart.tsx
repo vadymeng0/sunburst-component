@@ -8,43 +8,24 @@ import {
   RefObject,
 } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { arc, partition, radius, width } from "../../utils/d3utils";
 
 interface ZoomableChartProps {
   data?: LeafProps;
   setBreadcrumbIds: Dispatch<SetStateAction<{ name: string; id: string }[]>>;
   refSvg: RefObject<SVGSVGElement>;
+  colorSchema: string[];
 }
 
 const ZoomableChart: FC<ZoomableChartProps> = ({
   data,
   setBreadcrumbIds,
   refSvg,
+  colorSchema,
 }) => {
-  const partition = (dataPartition: any) => {
-    const root = d3
-      .hierarchy(dataPartition)
-      .sum((d) => d.count)
-      .sort((a, b) => (b?.value || 0) - (a?.value || 0));
-    return d3.partition().size([2 * Math.PI, root.height + 1])(root);
-  };
-
-  const color = d3.scaleOrdinal(
-    d3.quantize(d3.interpolateRainbow, (data?.children.length || 0) + 1)
-  );
+  const color = d3.scaleOrdinal(colorSchema);
 
   const format = d3.format(",d");
-
-  const width = 932;
-  const radius = width / 6;
-
-  const arc = d3
-    .arc()
-    .startAngle((d: any) => d.x0)
-    .endAngle((d: any) => d.x1)
-    .padAngle((d: any) => Math.min((d.x1 - d.x0) / 2, 0.005))
-    .padRadius(radius * 1.5)
-    .innerRadius((d: any) => d.y0 * radius)
-    .outerRadius((d: any) => Math.max(d.y0 * radius, d.y1 * radius - 1));
 
   const buildGraph = useCallback(() => {
     const svg = d3.select(refSvg.current).html("");
@@ -69,6 +50,10 @@ const ZoomableChart: FC<ZoomableChartProps> = ({
       .attr("fill", (d: any) => {
         while (d.depth > 1) d = d.parent;
         return color(d.data.name);
+      })
+      .attr("data-status", (d: any) => {
+        while (d.depth > 1) d = d.parent;
+        return d.data.status;
       })
       .attr("fill-opacity", (d: any) =>
         arcVisible(d.current) ? (d.children ? 0.6 : 0.4) : 0
@@ -210,7 +195,7 @@ const ZoomableChart: FC<ZoomableChartProps> = ({
       return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [refSvg, data]);
+  }, [refSvg, data, colorSchema]);
 
   useEffect(() => {
     buildGraph();
