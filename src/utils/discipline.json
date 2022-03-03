@@ -3,6 +3,7 @@
   "children": [
     {
       "name": "analytics",
+      "status": "completed",
       "children": [
         {
           "name": "cluster",
@@ -31,6 +32,7 @@
     },
     {
       "name": "animate",
+      "status": "in-progress",
       "children": [
         { "name": "Easing", "count": 17010 },
         { "name": "FunctionSequence", "count": 5842 },
@@ -61,6 +63,7 @@
     },
     {
       "name": "data",
+      "status": "pending",
       "children": [
         {
           "name": "converters",
@@ -82,6 +85,7 @@
     },
     {
       "name": "display",
+      "status": "failed",
       "children": [
         { "name": "DirtySprite", "count": 8833 },
         { "name": "LineSprite", "count": 1732 },
@@ -89,9 +93,14 @@
         { "name": "TextSprite", "count": 10066 }
       ]
     },
-    { "name": "flex", "children": [{ "name": "FlareVis", "count": 4116 }] },
+    {
+      "name": "flex",
+      "status": "completed",
+      "children": [{ "name": "FlareVis", "count": 4116 }]
+    },
     {
       "name": "physics",
+      "status": "completed",
       "children": [
         { "name": "DragForce", "count": 1082 },
         { "name": "GravityForce", "count": 1336 },
@@ -105,6 +114,7 @@
     },
     {
       "name": "query",
+      "status": "in-progress",
       "children": [
         { "name": "AggregateExpression", "count": 1616 },
         { "name": "And", "count": 1027 },
@@ -175,6 +185,7 @@
     },
     {
       "name": "scale",
+      "status": "pending",
       "children": [
         { "name": "IScaleMap", "count": 2105 },
         { "name": "LinearScale", "count": 1316 },
@@ -190,6 +201,7 @@
     },
     {
       "name": "util",
+      "status": "failed",
       "children": [
         { "name": "Arrays", "count": 8258 },
         { "name": "Colors", "count": 10001 },
@@ -235,6 +247,7 @@
     },
     {
       "name": "vis",
+      "status": "completed",
       "children": [
         {
           "name": "axis",

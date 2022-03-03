@@ -1,9 +1,10 @@
 {
   "name": "PI - Piping",
   "children": [
-    { "name": "Clean", "count": 100 },
+    { "name": "Clean", "count": 100, "status": "completed" },
     {
       "name": "missing data",
+      "status": "in-progress",
       "children": [
         { "name": "Arsenal", "count": 100 },
         { "name": "Wolver", "count": 20 },
@@ -11,9 +12,10 @@
         { "name": "complete", "count": 100 }
       ]
     },
-    { "name": "Validation Errors", "count": 100 },
+    { "name": "Validation Errors", "status": "pending", "count": 100 },
     {
       "name": "complete",
+      "status": "failed",
       "children": [
         {
           "name": "ME - Mechanical",
