@@ -6,24 +6,25 @@
       "name": "missing data",
       "status": "in-progress",
       "children": [
-        { "name": "Arsenal", "count": 100 },
-        { "name": "Wolver", "count": 20 },
-        { "name": "Tot", "count": 50 },
-        { "name": "complete", "count": 100 }
+        { "name": "Arsenal", "count": 100, "status": "in-progress" },
+        { "name": "Wolver", "count": 20, "status": "pending" },
+        { "name": "Tot", "count": 50, "status": "failed" },
+        { "name": "complete", "count": 100, "status": "in-progress" }
       ]
     },
     { "name": "Validation Errors", "status": "pending", "count": 100 },
     {
-      "name": "complete",
-      "status": "failed",
+      "name": "ZD",
+      "status": "completed",
       "children": [
         {
           "name": "ME - Mechanical",
+          "status": "in-progress",
           "children": [
-            { "name": "Clean", "count": 100 },
-            { "name": "missing data", "count": 100 },
-            { "name": "Validation Errors", "count": 100 },
-            { "name": "complete", "count": 100 }
+            { "name": "Clean", "count": 100, "status": "completed" },
+            { "name": "missing data", "count": 100, "status": "pending" },
+            { "name": "Validation Errors", "count": 100, "status": "failed" },
+            { "name": "complete", "count": 100, "status": "in-progress" }
           ]
         }
       ]

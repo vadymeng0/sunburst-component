@@ -8,25 +8,47 @@
         {
           "name": "cluster",
           "children": [
-            { "name": "AgglomerativeCluster", "count": 3938 },
-            { "name": "CommunityStructure", "count": 3812 },
-            { "name": "HierarchicalCluster", "count": 6714 },
-            { "name": "MergeEdge", "count": 743 }
+            {
+              "name": "AgglomerativeCluster",
+              "count": 3938,
+              "status": "completed"
+            },
+            {
+              "name": "CommunityStructure",
+              "count": 3812,
+              "status": "in-progress"
+            },
+            {
+              "name": "HierarchicalCluster",
+              "count": 6714,
+              "status": "failed"
+            },
+            { "name": "MergeEdge", "count": 743, "status": "completed" }
           ]
         },
         {
           "name": "graph",
           "children": [
-            { "name": "BetweennessCentrality", "count": 3534 },
-            { "name": "LinkDistance", "count": 5731 },
-            { "name": "MaxFlowMinCut", "count": 7840 },
-            { "name": "ShortestPaths", "count": 5914 },
-            { "name": "SpanningTree", "count": 3416 }
+            {
+              "name": "BetweennessCentrality",
+              "count": 3534,
+              "status": "pending"
+            },
+            { "name": "LinkDistance", "count": 5731, "status": "failed" },
+            { "name": "MaxFlowMinCut", "count": 7840, "status": "completed" },
+            { "name": "ShortestPaths", "count": 5914, "status": "pending" },
+            { "name": "SpanningTree", "count": 3416, "status": "completed" }
           ]
         },
         {
           "name": "optimization",
-          "children": [{ "name": "AspectRatioBanker", "count": 7074 }]
+          "children": [
+            {
+              "name": "AspectRatioBanker",
+              "count": 7074,
+              "status": "in-progress"
+            }
+          ]
         }
       ]
     },
@@ -34,31 +56,59 @@
       "name": "animate",
       "status": "in-progress",
       "children": [
-        { "name": "Easing", "count": 17010 },
-        { "name": "FunctionSequence", "count": 5842 },
+        { "name": "Easing", "count": 17010, "status": "failed" },
+        { "name": "FunctionSequence", "count": 5842, "status": "completed" },
         {
           "name": "interpolate",
           "children": [
-            { "name": "ArrayInterpolator", "count": 1983 },
-            { "name": "ColorInterpolator", "count": 2047 },
-            { "name": "DateInterpolator", "count": 1375 },
-            { "name": "Interpolator", "count": 8746 },
-            { "name": "MatrixInterpolator", "count": 2202 },
-            { "name": "NumberInterpolator", "count": 1382 },
-            { "name": "ObjectInterpolator", "count": 1629 },
-            { "name": "PointInterpolator", "count": 1675 },
-            { "name": "RectangleInterpolator", "count": 2042 }
+            {
+              "name": "ArrayInterpolator",
+              "count": 1983,
+              "status": "completed"
+            },
+            {
+              "name": "ColorInterpolator",
+              "count": 2047,
+              "status": "in-progress"
+            },
+            {
+              "name": "DateInterpolator",
+              "count": 1375,
+              "status": "pending"
+            },
+            { "name": "Interpolator", "count": 8746, "status": "pending" },
+            {
+              "name": "MatrixInterpolator",
+              "count": 2202,
+              "status": "failed"
+            },
+            { "name": "NumberInterpolator", "count": 1382, "status": "failed" },
+            {
+              "name": "ObjectInterpolator",
+              "count": 1629,
+              "status": "in-progress"
+            },
+            {
+              "name": "PointInterpolator",
+              "count": 1675,
+              "status": "completed"
+            },
+            {
+              "name": "RectangleInterpolator",
+              "count": 2042,
+              "status": "completed"
+            }
           ]
         },
-        { "name": "ISchedulable", "count": 1041 },
-        { "name": "Parallel", "count": 5176 },
-        { "name": "Pause", "count": 449 },
-        { "name": "Scheduler", "count": 5593 },
-        { "name": "Sequence", "count": 5534 },
-        { "name": "Transition", "count": 9201 },
-        { "name": "Transitioner", "count": 19975 },
-        { "name": "TransitionEvent", "count": 1116 },
-        { "name": "Tween", "count": 6006 }
+        { "name": "ISchedulable", "count": 1041, "status": "pending" },
+        { "name": "Parallel", "count": 5176, "status": "completed" },
+        { "name": "Pause", "count": 449, "status": "completed" },
+        { "name": "Scheduler", "count": 5593, "status": "in-progress" },
+        { "name": "Sequence", "count": 5534, "status": "completed" },
+        { "name": "Transition", "count": 9201, "status": "completed" },
+        { "name": "Transitioner", "count": 19975, "status": "failed" },
+        { "name": "TransitionEvent", "count": 1116, "status": "completed" },
+        { "name": "Tween", "count": 6006, "status": "completed" }
       ]
     },
     {
@@ -68,74 +118,87 @@
         {
           "name": "converters",
           "children": [
-            { "name": "Converters", "count": 721 },
-            { "name": "DelimitedTextConverter", "count": 4294 },
-            { "name": "GraphMLConverter", "count": 9800 },
-            { "name": "IDataConverter", "count": 1314 },
-            { "name": "JSONConverter", "count": 2220 }
+            { "name": "Converters", "count": 721, "status": "completed" },
+            {
+              "name": "DelimitedTextConverter",
+              "count": 4294,
+              "status": "completed"
+            },
+            { "name": "GraphMLConverter", "count": 9800, "status": "pending" },
+            {
+              "name": "IDataConverter",
+              "count": 1314,
+              "status": "in-progress"
+            },
+            { "name": "JSONConverter", "count": 2220, "status": "failed" }
           ]
         },
-        { "name": "DataField", "count": 1759 },
-        { "name": "DataSchema", "count": 2165 },
-        { "name": "DataSet", "count": 586 },
-        { "name": "DataSource", "count": 3331 },
-        { "name": "DataTable", "count": 772 },
-        { "name": "DataUtil", "count": 3322 }
+        { "name": "DataField", "count": 1759, "status": "pending" },
+        { "name": "DataSchema", "count": 2165, "status": "completed" },
+        { "name": "DataSet", "count": 586, "status": "in-progress" },
+        { "name": "DataSource", "count": 3331, "status": "completed" },
+        { "name": "DataTable", "count": 772, "status": "failed" },
+        { "name": "DataUtil", "count": 3322, "status": "completed" }
       ]
     },
     {
       "name": "display",
-      "status": "failed",
+      "status": "pending",
       "children": [
-        { "name": "DirtySprite", "count": 8833 },
-        { "name": "LineSprite", "count": 1732 },
-        { "name": "RectSprite", "count": 3623 },
-        { "name": "TextSprite", "count": 10066 }
+        { "name": "DirtySprite", "count": 8833, "status": "completed" },
+        { "name": "LineSprite", "count": 1732, "status": "failed" },
+        { "name": "RectSprite", "count": 3623, "status": "pending" },
+        { "name": "TextSprite", "count": 10066, "status": "in-progress" }
       ]
     },
     {
       "name": "flex",
       "status": "completed",
-      "children": [{ "name": "FlareVis", "count": 4116 }]
+      "children": [{ "name": "FlareVis", "count": 4116, "status": "completed" }]
     },
     {
       "name": "physics",
       "status": "completed",
       "children": [
-        { "name": "DragForce", "count": 1082 },
-        { "name": "GravityForce", "count": 1336 },
-        { "name": "IForce", "count": 319 },
-        { "name": "NBodyForce", "count": 10498 },
-        { "name": "Particle", "count": 2822 },
-        { "name": "Simulation", "count": 9983 },
-        { "name": "Spring", "count": 2213 },
-        { "name": "SpringForce", "count": 1681 }
+        { "name": "DragForce", "count": 1082, "status": "completed" },
+        { "name": "GravityForce", "count": 1336, "status": "pending" },
+        { "name": "IForce", "count": 319, "status": "completed" },
+        { "name": "NBodyForce", "count": 10498, "status": "in-progress" },
+        { "name": "Particle", "count": 2822, "status": "completed" },
+        { "name": "Simulation", "count": 9983, "status": "failed" },
+        { "name": "Spring", "count": 2213, "status": "completed" },
+        { "name": "SpringForce", "count": 1681, "status": "completed" }
       ]
     },
     {
       "name": "query",
       "status": "in-progress",
       "children": [
-        { "name": "AggregateExpression", "count": 1616 },
-        { "name": "And", "count": 1027 },
-        { "name": "Arithmetic", "count": 3891 },
-        { "name": "Average", "count": 891 },
-        { "name": "BinaryExpression", "count": 2893 },
-        { "name": "Comparison", "count": 5103 },
-        { "name": "CompositeExpression", "count": 3677 },
-        { "name": "Count", "count": 781 },
-        { "name": "DateUtil", "count": 4141 },
-        { "name": "Distinct", "count": 933 },
-        { "name": "Expression", "count": 5130 },
-        { "name": "ExpressionIterator", "count": 3617 },
-        { "name": "Fn", "count": 3240 },
-        { "name": "If", "count": 2732 },
-        { "name": "IsA", "count": 2039 },
-        { "name": "Literal", "count": 1214 },
-        { "name": "Match", "count": 3748 },
-        { "name": "Maximum", "count": 843 },
+        { "name": "AggregateExpression", "count": 1616, "status": "completed" },
+        { "name": "And", "count": 1027, "status": "completed" },
+        { "name": "Arithmetic", "count": 3891, "status": "pending" },
+        { "name": "Average", "count": 891, "status": "completed" },
+        { "name": "BinaryExpression", "count": 2893, "status": "completed" },
+        { "name": "Comparison", "count": 5103, "status": "completed" },
+        {
+          "name": "CompositeExpression",
+          "count": 3677,
+          "status": "in-progress"
+        },
+        { "name": "Count", "count": 781, "status": "completed" },
+        { "name": "DateUtil", "count": 4141, "status": "completed" },
+        { "name": "Distinct", "count": 933, "status": "failed" },
+        { "name": "Expression", "count": 5130, "status": "completed" },
+        { "name": "ExpressionIterator", "count": 3617, "status": "completed" },
+        { "name": "Fn", "count": 3240, "status": "completed" },
+        { "name": "If", "count": 2732, "status": "completed" },
+        { "name": "IsA", "count": 2039, "status": "pending" },
+        { "name": "Literal", "count": 1214, "status": "in-progress" },
+        { "name": "Match", "count": 3748, "status": "completed" },
+        { "name": "Maximum", "count": 843, "status": "completed" },
         {
           "name": "methods",
+          "status": "completed",
           "children": [
             { "name": "add", "count": 593 },
             { "name": "and", "count": 330 },
@@ -201,7 +264,7 @@
     },
     {
       "name": "util",
-      "status": "failed",
+      "status": "pending",
       "children": [
         { "name": "Arrays", "count": 8258 },
         { "name": "Colors", "count": 10001 },

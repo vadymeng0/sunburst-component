@@ -8,7 +8,11 @@ import Title from "./Title";
 import ZoomableChart from "./ZoomableChart";
 
 import "./style.scss";
-import { getColorSchema, partition } from "../../utils/d3utils";
+import {
+  getColorSchema,
+  partition,
+  unselectedOrUndefinedColor,
+} from "../../utils/d3utils";
 import { MultiValue } from "react-select";
 
 interface SunburstProps {
@@ -34,27 +38,27 @@ const Sunburst: FC<SunburstProps> = ({ data }) => {
     if (!dataSelected?.data.children.length) return;
 
     const newListStatus: { [key: string]: string } = {};
-    const newColorSchema: string[] = [];
-    const rainbowColors = getColorSchema(dataSelected?.data.children.length);
 
     const root = partition(dataSelected?.data);
-    const rooDescendants = root
-      .descendants()
-      .slice(1, dataSelected?.data.children.length + 1);
+    const rooDescendants = root.descendants().slice(1);
 
     rooDescendants.forEach((item: any, index) => {
       if (item.data.status && !newListStatus[item.data.status]) {
-        newListStatus[item.data.status] = rainbowColors[index];
-        newColorSchema.push(rainbowColors[index]);
-      } else {
-        newColorSchema.push(newListStatus[item.data.status as string]);
+        newListStatus[item.data.status] = "red"; // give it a temp red color
       }
     });
+
+    const rainbowColors = getColorSchema(Object.keys(newListStatus).length);
+    setColorSchema([...rainbowColors]);
+
+    Object.keys(newListStatus).forEach((item: string, index) => {
+      newListStatus[item] = rainbowColors[index];
+    });
+
     setListStatus(newListStatus);
     setSelectedStatus(
       Object.keys(newListStatus).map((item) => ({ value: item, label: item }))
     );
-    setColorSchema(newColorSchema);
   }, [dataSelected]);
 
   const resetBreadcrumb = (name: string) => {
@@ -103,7 +107,10 @@ const Sunburst: FC<SunburstProps> = ({ data }) => {
         const thisPath = d3.select(this);
         const currentStatus = thisPath.attr("data-status");
         const isSelected = newSelectedStatus.includes(currentStatus);
-        thisPath.attr("fill", isSelected ? listStatus[currentStatus] : "grey");
+        thisPath.attr(
+          "fill",
+          isSelected ? listStatus[currentStatus] : unselectedOrUndefinedColor
+        );
       });
     },
     [listStatus]

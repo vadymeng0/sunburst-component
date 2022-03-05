@@ -8,7 +8,13 @@ import {
   RefObject,
 } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { arc, partition, radius, width } from "../../utils/d3utils";
+import {
+  arc,
+  partition,
+  radius,
+  unselectedOrUndefinedColor,
+  width,
+} from "../../utils/d3utils";
 
 interface ZoomableChartProps {
   data?: LeafProps;
@@ -48,11 +54,11 @@ const ZoomableChart: FC<ZoomableChartProps> = ({
       .data(root.descendants().slice(1))
       .join("path")
       .attr("fill", (d: any) => {
-        while (d.depth > 1) d = d.parent;
-        return color(d.data.name);
+        return d.data.status
+          ? color(d.data.status)
+          : unselectedOrUndefinedColor;
       })
       .attr("data-status", (d: any) => {
-        while (d.depth > 1) d = d.parent;
         return d.data.status;
       })
       .attr("fill-opacity", (d: any) =>

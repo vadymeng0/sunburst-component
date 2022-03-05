@@ -24,3 +24,5 @@ export const arc = d3
   .padRadius(radius * 1.5)
   .innerRadius((d: any) => d.y0 * radius)
   .outerRadius((d: any) => Math.max(d.y0 * radius, d.y1 * radius - 1));
+
+export const unselectedOrUndefinedColor = "grey";
