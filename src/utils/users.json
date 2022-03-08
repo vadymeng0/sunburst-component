@@ -1,7 +1,12 @@
 {
   "name": "PI - Piping",
   "children": [
-    { "name": "Clean", "count": 100, "status": "completed" },
+    {
+      "name": "Clean code",
+      "count": 100,
+      "status": "completed",
+      "fontSize": "20px"
+    },
     {
       "name": "missing data",
       "status": "in-progress",
@@ -16,6 +21,7 @@
     {
       "name": "ZD",
       "status": "completed",
+      "fontSize": "30px",
       "children": [
         {
           "name": "ME - Mechanical",

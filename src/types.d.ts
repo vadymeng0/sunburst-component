@@ -2,12 +2,14 @@ interface Leaf {
   name: string;
   count: number;
   status?: string;
+  fontSize?: string;
 }
 
 interface LeafProps {
   name: string;
   children: (Leaf | LeafProps)[];
   status?: string;
+  fontSize?: string;
 }
 
 interface ProjectDataResponseItem {

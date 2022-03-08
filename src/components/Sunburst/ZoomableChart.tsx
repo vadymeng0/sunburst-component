@@ -94,7 +94,10 @@ const ZoomableChart: FC<ZoomableChartProps> = ({
       .attr("dy", "0.35em")
       .attr("fill-opacity", (d: any) => +labelVisible(d.current))
       .attr("transform", (d: any) => labelTransform(d.current))
-      .text((d: any) => d.data.name);
+      .text((d: any) => d.data.name)
+      .attr("font-size", (d: any) => {
+        return d.data.fontSize || "12px";
+      });
 
     const parent = g
       .append("circle")
