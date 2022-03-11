@@ -78,7 +78,7 @@ const ZoomableChart: FC<ZoomableChartProps> = ({
       (d) =>
         `${d
           .ancestors()
-          .map((d: any) => d.data.name)
+          .map((d: any) => d.data?.label || d.data.name)
           .reverse()
           .join("/")}\n${format(d.value || 0)}`
     );

@@ -5,13 +5,19 @@
       "name": "Clean code",
       "count": 100,
       "status": "completed",
-      "fontSize": "20px"
+      "fontSize": "20px",
+      "label": "This is long label, long text"
     },
     {
       "name": "missing data",
       "status": "in-progress",
       "children": [
-        { "name": "Arsenal", "count": 100, "status": "in-progress" },
+        {
+          "name": "Arsenal",
+          "count": 100,
+          "status": "in-progress",
+          "label": "This is long label, long text for Arsenal"
+        },
         { "name": "Wolver", "count": 20, "status": "pending" },
         { "name": "Tot", "count": 50, "status": "failed" },
         { "name": "complete", "count": 100, "status": "in-progress" }
@@ -22,6 +28,7 @@
       "name": "ZD",
       "status": "completed",
       "fontSize": "30px",
+      "label": "This is long label, long text ZD",
       "children": [
         {
           "name": "ME - Mechanical",

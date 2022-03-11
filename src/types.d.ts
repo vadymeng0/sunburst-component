@@ -3,6 +3,7 @@ interface Leaf {
   count: number;
   status?: string;
   fontSize?: string;
+  label?: string;
 }
 
 interface LeafProps {
@@ -10,6 +11,7 @@ interface LeafProps {
   children: (Leaf | LeafProps)[];
   status?: string;
   fontSize?: string;
+  label?: string;
 }
 
 interface ProjectDataResponseItem {
